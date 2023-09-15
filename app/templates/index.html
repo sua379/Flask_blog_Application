@@ -1,0 +1,349 @@
+{%extends "basefile.html"%}
+
+{%block content%}
+
+  <main id="main">
+
+    <!-- ======= Hero Slider Section ======= -->
+    <section id="hero-slider" class="hero-slider">
+      <div class="container-md" data-aos="fade-in">
+        <div class="row">
+          <div class="col-12">
+            <div class="swiper sliderFeaturedPosts">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="{{url_for('main.singlepost', id=1)}}" class="img-bg d-flex align-items-end" style="background-image: url('{{url_for('static', filename=slide_posts[0].featured_image)}}');">
+                    <div class="img-bg-inner">
+                      <h2>{{slide_posts[0].post_title}}</h2>
+                      <p>{{slide_posts[0].post_intro}}</p>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="swiper-slide">
+                  <a href="{{url_for('main.singlepost', id=1)}}" class="img-bg d-flex align-items-end" style="background-image: url('{{url_for('static', filename=slide_posts[1].featured_image)}}');">
+                    <div class="img-bg-inner">
+                      <h2>{{slide_posts[1].post_title}}</h2>
+                      <p>{{slide_posts[1].post_intro}}</p>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="swiper-slide">
+                  <a href="{{url_for('main.singlepost', id=1)}}" class="img-bg d-flex align-items-end" style="background-image: url('{{url_for('static', filename=slide_posts[2].featured_image)}}');">
+                    <div class="img-bg-inner">
+                      <h2>{{slide_posts[2].post_title}}</h2>
+                      <p>{{slide_posts[2].post_intro}}</p>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="swiper-slide">
+                  <a href="{{url_for('main.singlepost', id=1)}}" class="img-bg d-flex align-items-end" style="background-image: url('{{url_for('static', filename=slide_posts[3].featured_image)}}');">
+                    <div class="img-bg-inner">
+                      <h2>{{slide_posts[3].post_title}}</h2>
+                      <p>{{slide_posts[3].post_intro}}</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="custom-swiper-button-next">
+                <span class="bi-chevron-right"></span>
+              </div>
+              <div class="custom-swiper-button-prev">
+                <span class="bi-chevron-left"></span>
+              </div>
+
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Hero Slider Section -->
+
+    <!-- ======= Post Grid Section ======= -->
+    <section id="posts" class="posts">
+      <div class="container" data-aos="fade-up">
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <div class="post-entry-1 lg">
+              <a href=><img src="{{url_for('static', filename=post_grid[0].featured_image)}}" alt="" class="img-fluid"></a>
+              <div class="post-meta"><span class="date">{{post_grid[0].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(post_grid[0].date).fromNow()}}</span></div>
+              <h2><a href="{{url_for('main.singlepost', id=1)}}">{{post_grid[0].post_title}}</a></h2>
+              <p class="mb-4 d-block">{{post_grid[0].post_intro}}</p>
+
+              <div class="d-flex align-items-center author">
+                <div class="photo"><img src="static/img/person-1.jpg" alt="" class="img-fluid"></div>
+                <div class="name">
+                  <h3 class="m-0 p-0">{{post_grid[0].author.name}}</h3>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-8">
+            <div class="row g-5">
+              <div class="col-lg-4 border-start custom-border">
+                 {%for i in range (1,4)%}
+                <div class="post-entry-1">
+                  <a href="{{url_for('main.singlepost', id=1)}}"><img src="{{url_for('static', filename=post_grid[i].featured_image)}}" alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">{{post_grid[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(post_grid[i].date).fromNow()}}</span></div>
+                  <h2><a href="{{url_for('main.singlepost', id=1)}}">{{post_grid[i].post_title}}</a></h2>
+                </div>
+              
+                
+                {%endfor%}
+              </div>
+              <div class="col-lg-4 border-start custom-border">
+                 {%for i in range (3,7)%}
+                <div class="post-entry-1">
+                  <a href="{{url_for('main.singlepost', id=1)}}"><img src="{{url_for('static', filename=post_grid[i].featured_image)}}" alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">{{post_grid[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(post_grid[i].date).fromNow()}}</span></div>
+                  <h2><a href="{{url_for('main.singlepost', id=1)}}">{{post_grid[i].post_title}}</a></h2>
+                </div>
+                {%endfor%}
+              </div>
+              <!-- Trending Section -->
+              <div class="col-lg-4">
+                <div class="trending">
+                  <h3>Trending</h3>
+                  <ul class="trending-post">   
+                {%for i in range(1,6)%}
+                    <li>
+                      <a href="{{url_for('main.singlepost', id=1)}}">
+                        <span class="number">i</span>
+                        <h3>{{trending[i].post_title}}</h3>
+                        <span class="author">{{trending[i].author.name}}</span>
+                      </a>
+                    </li>
+                {%endfor%}
+                  </ul>
+                </div>
+              </div> <!-- End Trending Section -->
+            </div>
+          </div>
+
+        </div> <!-- End .row -->
+      </div>
+    </section> <!-- End Post Grid Section -->
+
+    <!-- ======= Culture Category Section ======= -->
+    <section class="category-section">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header d-flex justify-content-between align-items-center mb-5">
+          <h2>Culture</h2>
+          <div><a href="{{url_for('main.category', cat='Culture')}}" class="more">See All Culture</a></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9">
+
+            <div class="d-lg-flex post-entry-2">
+              <a href="{{url_for('main.singlepost', id=1)}}" class="me-4 thumbnail mb-4 mb-lg-0 d-inline-block">
+                <img src="{{url_for('static', filename=culture[0].featured_image)}}" alt="" class="img-fluid">
+              </a>
+              <div>
+                <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>{{moment(culture[0].date).fromNow()}}</span></div>
+                <h3><a href="{{url_for('main.singlepost', id=1)}}">{{culture[0].post_title}}</a></h3>
+                <p>{{culture[0].post_intro}}</p>
+                <div class="d-flex align-items-center author">
+                  <div class="photo"><img src="static/img/person-2.jpg" alt="" class="img-fluid"></div>
+                  <div class="name">
+                    <h3 class="m-0 p-0">{{culture[0].author.name}}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="post-entry-1 border-bottom">
+                  <a href="{{url_for('main.singlepost', id=1)}}"><img src="{{url_for('static', filename=culture[1].featured_image)}}" alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>{{moment(culture[1].date).fromNow()}}</span></div>
+                  <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{culture[1].post_title}}</a></h2>
+                  <span class="author mb-3 d-block">{{culture[1].author.name}}</span>
+                  <p class="mb-4 d-block">{{culture[1].post_intro}}</p>
+                </div>
+
+                <div class="post-entry-1">
+                  <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>{{moment(culture[2].date).fromNow()}}</span></div>
+                  <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{culture[2].post_title}}</a></h2>
+                  <span class="author mb-3 d-block">{{culture[2].author.name}}</span>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="post-entry-1">
+                  <a href="{{url_for('main.singlepost', id=1)}}"><img src="{{url_for('static', filename=culture[3].featured_image)}}"alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>{{moment(culture[3].date).fromNow()}}</span></div>
+                  <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{culture[3].post_title}}</a></h2>
+                  <span class="author mb-3 d-block">{{culture[3].author.name}}</span>
+                  <p class="mb-4 d-block">{{culture[3].post_intro}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+          {%for i in range(4,9)%}
+            <div class="post-entry-1 border-bottom">
+              <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>{{moment(culture[i].date).fromNow()}}</span></div>
+              <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{culture[i].post_title}}</a></h2>
+              <span class="author mb-3 d-block">{{culture[i].author.name}}</span>
+            </div>
+            {%endfor%}
+          </div>
+        </div>
+      </div>
+    </section><!-- End Culture Category Section -->
+
+    <!-- ======= Business Category Section ======= -->
+    <section class="category-section">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header d-flex justify-content-between align-items-center mb-5">
+          <h2>Business</h2>
+          <div><a href="{{url_for('main.category', cat='business')}}" class="more">See All Business</a></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-9 order-md-2">
+
+            <div class="d-lg-flex post-entry-2">
+              <a href="{{url_for('main.singlepost', id=1)}}" class="me-4 thumbnail d-inline-block mb-4 mb-lg-0">
+                <img src="{{url_for('static', filename=business[0].featured_image)}}" alt="" class="img-fluid">
+              </a>
+              <div>
+                <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>{{moment(business[0].date).fromNow()}}</span></div>
+                <h3><a href="{{url_for('main.singlepost', id=1)}}">{{business[0].post_title}}</a></h3>
+                <p>{{business[0].post_intro}}</p>
+                <div class="d-flex align-items-center author">
+                  <div class="photo"><img src="static/img/person-4.jpg" alt="" class="img-fluid"></div>
+                  <div class="name">
+                    <h3 class="m-0 p-0">{{business[0].author.name}}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="post-entry-1 border-bottom">
+                  <a href="{{url_for('main.singlepost', id=1)}}"><img src="{{url_for('static', filename=business[1].featured_image)}}" alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>{{moment(business[1].date).fromNow()}}</span></div>
+                  <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{business[1].post_title}}</a></h2>
+                  <span class="author mb-3 d-block">{{business[1].author.name}}</span>
+                  <p class="mb-4 d-block">{{business[1].post_intro}}</p>
+                </div>
+
+                <div class="post-entry-1">
+                  <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>{{moment(business[2].date).fromNow()}}</span></div>
+                  <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{business[2].post_title}}</a></h2>
+                  <span class="author mb-3 d-block">{{business[2].author.name}}</span>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="post-entry-1">
+                  <a href="{{url_for('main.singlepost', id=1)}}"><img src="{{url_for('static', filename=business[3].featured_image)}}" alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>{{moment(business[3].date).fromNow()}}</span></div>
+                  <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{business[3].post_title}}</a></h2>
+                  <span class="author mb-3 d-block">{{business[3].author.name}}</span>
+                  <p class="mb-4 d-block">{{business[1].post_intro}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+          {%for i in range(4,10)%}
+            <div class="post-entry-1 border-bottom">
+              <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>{{moment(business[i].date).fromNow()}}</span></div>
+              <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{business[i].post_title}}</a></h2>
+              <span class="author mb-3 d-block">{{business[i].author.name}}</span>
+            </div>
+         {%endfor%}
+          </div>
+        </div>
+      </div>
+    </section><!-- End Business Category Section -->
+
+    <!-- ======= Sports Category Section ======= -->
+    <section class="category-section">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header d-flex justify-content-between align-items-center mb-5">
+          <h2>Sport</h2>
+          <div><a href="{{url_for('main.category', cat='Sport')}}" class="more">See All Sport</a></div>
+        </div>
+
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <div class="post-entry-1 lg">
+              <a href="{{url_for('main.singlepost', id=1)}}"><img src="{{url_for('static', filename=sport[0].featured_image)}}" alt="" class="img-fluid"></a>
+              <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>{{moment(sport[0].date).fromNow()}}</span></div>
+              <h2><a href="{{url_for('main.singlepost', id=1)}}">{{sport[0].post_title}}</a></h2>
+              <p class="mb-4 d-block">{{sport[0].post_intro}}</p>
+
+              <div class="d-flex align-items-center author">
+                <div class="photo"><img src="static/img/person-7.jpg" alt="" class="img-fluid"></div>
+                <div class="name">
+                  <h3 class="m-0 p-0">{{sport[0].author.name}}</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="post-entry-1 border-bottom">
+              <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>{{moment(sport[1].date).fromNow()}}</span></div>
+              <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{sport[1].post_title}}</a></h2>
+              <span class="author mb-3 d-block">{{sport[1].author.name}}</span>
+            </div>
+
+            <div class="post-entry-1">
+              <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>{{moment(sport[2].date).fromNow()}}</span></div>
+              <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{sport[2].post_title}}</a></h2>
+              <span class="author mb-3 d-block">{{sport[2].author.name}}</span>
+            </div>
+
+          </div>
+
+          <div class="col-lg-8">
+            <div class="row g-5">
+              <div class="col-lg-4 border-start custom-border">
+              {%for i in range(3,7)%}
+                <div class="post-entry-1">
+                  <a href="{{url_for('main.singlepost', id=1)}}"><img src="{{url_for('static', filename=sport[i].featured_image)}}"alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>{{moment(sport[i].date).fromNow()}}</span></div>
+                  <h2><a href="{{url_for('main.singlepost', id=1)}}">{{sport[i].post_title}}</a></h2>
+                </div>
+            {%endfor%}
+              </div>
+              <div class="col-lg-4 border-start custom-border">
+              {%for i in range(6,9)%}
+                <div class="post-entry-1">
+                  <a href="{{url_for('main.singlepost', id=1)}}"><img src="{{url_for('static', filename=sport[i].featured_image)}}" alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>{{moment(sport[i].date).fromNow()}}</span></div>
+                  <h2><a href="{{url_for('main.singlepost', id=1)}}">{{sport[i].post_title}}</a></h2>
+                </div>
+            {%endfor%}
+              </div>
+              <div class="col-lg-4">
+              {%for i in range(1,7)%}
+                <div class="post-entry-1 border-bottom">
+                  <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>{{moment(sport[i].date).fromNow()}}</span></div>
+                  <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=1)}}">{{sport[i].post_title}}</a></h2>
+                  <span class="author mb-3 d-block">{{sport[i].author.name}}</span>
+                </div>
+             {%endfor%}
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- End .row -->
+      </div>
+    </section><!-- End Sport Category Section -->
+
+  </main><!-- End #main -->
+
+{%endblock%}
+
+ 

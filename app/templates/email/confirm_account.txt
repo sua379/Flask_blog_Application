@@ -1,0 +1,10 @@
+
+Hello,
+    
+    Welcome to Pharm Africa, Please click <a href="{{url_for('auth.confirm_user', token=token, _external=True)}}">here </a></li> to confirm your account.
+    
+    Thanks,
+
+Pharm Africa.
+
+Note:These emails are not monitored.

@@ -1,0 +1,138 @@
+{%extends "basefile.html"%}
+{%import "_macros.html" as macros%}
+{%block content%}
+
+  <main id="main">
+    <section>
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-9" data-aos="fade-up">
+            <h3 class="category-title">Category: {{pagination.items[0].category}}</h3>
+
+            {%for i in range(5)%}
+            {%if pagination.items[i]%}
+            <div class="d-md-flex post-entry-2 half">
+              <a href="{{url_for('main.singlepost', id=1)}}" class="me-4 thumbnail">
+                <img src="{{url_for('static', filename=pagination.items[i].featured_image)}}" alt="" class="img-fluid">
+              </a>
+              <div>
+                <div class="post-meta"><span class="date">{{pagination.items[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(pagination.items[i].date).fromNow()}}</span></div>
+                <h3><a href="{{url_for('main.singlepost', id=1)}}">{{pagination.items[i].post_title}}?</a></h3>
+                <p>{{pagination.items[i].post_intro}}</p>
+                <div class="d-flex align-items-center author">
+                  <div class="photo"><img src="{{url_for('static', filename='/img/person-' + i|string + '.jpg')}}" alt="" class="img-fluid"></div>
+                  <div class="name">
+                    <h3 class="m-0 p-0">{{pagination.items[i].author.name}}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {%endif%}
+            {%endfor%}
+
+            <div class="text-start py-4">
+                {{macros.pagination_widget(pagination, 'main.category', pagination.items[0].category)}} 
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <!-- ======= Sidebar ======= -->
+            <div class="aside-block">
+
+              <ul class="nav nav-pills custom-tab-nav mb-4" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="pills-popular-tab" data-bs-toggle="pill" data-bs-target="#pills-popular" type="button" role="tab" aria-controls="pills-popular" aria-selected="true">Popular</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-trending-tab" data-bs-toggle="pill" data-bs-target="#pills-trending" type="button" role="tab" aria-controls="pills-trending" aria-selected="false">Trending</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-latest-tab" data-bs-toggle="pill" data-bs-target="#pills-latest" type="button" role="tab" aria-controls="pills-latest" aria-selected="false">Latest</button>
+                </li>
+              </ul>
+
+              <div class="tab-content" id="pills-tabContent">
+
+                <!-- Popular -->
+                <div class="tab-pane fade show active" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">
+                {%for i in range(0,5)%}
+                  <div class="post-entry-1 border-bottom">
+                    <div class="post-meta"><span class="date">{{popular[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(popular[i].date).fromNow()}}</span></div>
+                    <h2 class="mb-2"><a href="#">{{popular[i].post_title}}</a></h2>
+                    <span class="author mb-3 d-block">{{popular[i].author.name}}</span>
+                  </div>
+                  {%endfor%}
+                </div> <!-- End Popular -->
+                
+                
+                                <!-- Trending -->
+                <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
+                {%for i in range(0,5) %}
+                  <div class="post-entry-1 border-bottom">
+                    <div class="post-meta"><span class="date">{{trending[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(trending[i].date).fromNow()}}</span></div>
+                    <h2 class="mb-2"><a href="#">{{trending[i].post_title}}</a></h2>
+                    <span class="author mb-3 d-block">{{trending[i].author.name}}</span>
+                  </div>
+                {%endfor%}
+                </div> <!-- End Trending -->
+
+                <!-- Latest -->
+                <div class="tab-pane fade" id="pills-latest" role="tabpanel" aria-labelledby="pills-latest-tab">
+                {%for i in range(0,5)%}
+                  <div class="post-entry-1 border-bottom">
+                    <div class="post-meta"><span class="date">{{latest[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(latest[i].date).fromNow()}}</span></div>
+                    <h2 class="mb-2"><a href="#">{{latest[i].post_title}}</a></h2>
+                    <span class="author mb-3 d-block">{{latest[i].author.name}}</span>
+                  </div>
+                {%endfor%}
+                </div> <!-- End Latest -->
+
+              </div>
+            </div>
+
+            <div class="aside-block">
+              <h3 class="aside-title">Video</h3>
+              <div class="video-post">
+                <a href="https://www.youtube.com/watch?v=AiFfDjmd0jU" class="glightbox link-video">
+                  <span class="bi-play-fill"></span>
+                  <img src="{{url_for('static', filename='/img/post-landscape-5.jpg')}}" alt="" class="img-fluid">
+                </a>
+              </div>
+            </div><!-- End Video -->
+
+            <div class="aside-block">
+              <h3 class="aside-title">Categories</h3>
+              <ul class="aside-links list-unstyled">
+                <li><a href="{{url_for('main.category', cat='business')}}"><i class="bi bi-chevron-right"></i> Business</a></li>
+                <li><a href="{{url_for('main.category', cat='Culture')}}"><i class="bi bi-chevron-right"></i> Culture</a></li>
+                <li><a href="{{url_for('main.category', cat='Sport')}}"><i class="bi bi-chevron-right"></i> Sport</a></li>
+                <li><a href="{{url_for('main.category', cat='Food')}}"><i class="bi bi-chevron-right"></i> Food</a></li>
+                <li><a href="{{url_for('main.category', cat='Politics')}}"><i class="bi bi-chevron-right"></i> Politics</a></li>
+                <li><a href="{{url_for('main.category', cat='Celebrity')}}"><i class="bi bi-chevron-right"></i> Celebrity</a></li>
+                <li><a href="{{url_for('main.category', cat='Startup')}}"><i class="bi bi-chevron-right"></i> Startups</a></li>
+                <li><a href="{{url_for('main.category', cat='Travel')}}"><i class="bi bi-chevron-right"></i> Travel</a></li>
+              </ul>
+            </div><!-- End Categories -->
+
+            <div class="aside-block">
+              <h3 class="aside-title">Tags</h3>
+              <ul class="aside-tags list-unstyled">
+                <li><a href="{{url_for('main.category', cat='business')}}">Business</a></li>
+                <li><a href="{{url_for('main.category', cat='Culture')}}">Culture</a></li>
+                <li><a href="{{url_for('main.category', cat='Sport')}}">Sport</a></li>
+                <li><a href="{{url_for('main.category', cat='Food')}}">Food</a></li>
+                <li><a href="{{url_for('main.category', cat='Politics')}}">Politics</a></li>
+                <li><a href="{{url_for('main.category', cat='Celebrity')}}">Celebrity</a></li>
+                <li><a href="{{url_for('main.category', cat='Startup')}}">Startups</a></li>
+                <li><a href="{{url_for('main.category', cat='Travel')}}">Travel</a></li>
+              </ul>
+            </div><!-- End Tags -->
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+
+{%endblock%}

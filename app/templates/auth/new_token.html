@@ -1,0 +1,12 @@
+{%extends "basefile.html"%}
+
+{%block content%}
+<main id="main">
+
+
+Something went wrong, please click <a href="{{url_for('auth.generate_token', _external=True)}}">here </a>to request for another token
+
+</main>
+{%endblock%}
+
+

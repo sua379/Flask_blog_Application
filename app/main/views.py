@@ -16,6 +16,8 @@ from .models import contact_db, blog_db, comments_db
 from app import db, ckeditor
 import uuid
 import os
+import re 
+from flask_ckeditor import upload_success, upload_fail 
 
 
 @main.route('/')
@@ -109,28 +111,31 @@ def about():
     return render_template('about.html')
 
 
-@main.route('/files/<filename>')
+@main.route('/files/<path:filename>')
 def uploaded_file(filename):
     path=current_app.config['UPLOAD_FOLDER']
-    return send_from_directory('sjd', filename)
+    return send_from_directory(path, filename)
 
 @main.route('/image_upload', methods=['POST'])
-@ckeditor.uploader
 def image_upload():
     file=request.files.get('upload')
+    extension=file.filename.split('.')[-1].lower()
+    if extension not in ['jpg', 'png', 'gif', 'jpeg']:
+        return upload_fail(message='Upload Error, only image files allowed')
     random_sg=str(uuid.uuid1())+'_'+ file.filename
     random_string=random_sg.replace('\\','/')
-    #file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], random_string))
-    
-    return url_for('main.uploaded_file', filename=random_string)
+    file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], random_string))
+    url=url_for('main.uploaded_file', filename=random_string)
+    return upload_success(url, filename=random_string)
 
 @main.route('/upload', methods=['GET', 'POST'])
 @login_required
 def uplaod():
     form=Upload_Post()
     if form.validate_on_submit():
-        intr=form.post.data.split('<p>')[0]
-        intro=intr.replace('<p>', '')
+        intr=form.post.data.split('</p>')[0]
+        pattern='<[^>]+>'
+        intro=re.sub(pattern, '', intr)
         image_nam=form.featured_image.data 
         image_name=image_nam.filename
         random_sg=str(uuid.uuid1())+'_'+ image_name
@@ -142,16 +147,13 @@ def uplaod():
                        post_body=form.post.data,
                        post_intro=intro,
                        category=form.category.data,
-                       featured_image=random_string
+                       featured_image='/img/'+random_string
                        )
         file_path=os.path.join(current_app.config['UPLOAD_FOLDER'], random_string)
         form.featured_image.data.save(file_path.replace('\\','/'))
-        
-        
         db.session.add(upload)
         db.session.commit()
-        
-            
+        #return render_template('test.html', intro=intro)
         return(redirect(url_for('main.home')))
     return render_template('add_post.html', form=form)
         
@@ -163,4 +165,4 @@ def uplaod():
 def check():
     form=Upload_Post()
     flash('i am just testing out the new feature')
-    return render_template('add_post.html', current_time=datetime.utcnow(), form=form)
+    return render_template('test.html')

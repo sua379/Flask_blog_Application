@@ -10,7 +10,7 @@
 
             <!-- ======= Single Post Content ======= -->
             <div class="single-post">
-              <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+              <div class="post-meta"><span class="date">{{post.category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(post.date).fromNow()}}</span></div>
               <h1 class="mb-5">{{post.post_title|safe}}</h1>
                     {{post.post_body|safe}}
                     

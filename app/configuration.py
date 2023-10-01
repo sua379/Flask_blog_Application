@@ -8,9 +8,6 @@ Created on Tue Aug 22 21:14:32 2023
 import os
 
 
-
-print(os.getenv('Password'))
-
 class config():
     SECRET_KEY=os.getenv('SECRET_KEY') or 'A VERY VERY UNSECRET KEY'
     SQLALCHEMY_COMMIT_ON_TEARDOWN=True

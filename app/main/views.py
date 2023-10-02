@@ -156,6 +156,12 @@ def uplaod():
         #return render_template('test.html', intro=intro)
         return(redirect(url_for('main.home')))
     return render_template('add_post.html', form=form)
+
+@main.context_processor
+def inject_posts():
+    base_post=blog_db.query.order_by(blog_db.date)
+    return dict(base_post=base_post)
+        
         
         
         

@@ -75,11 +75,11 @@
           <li class="dropdown"><a href="{{url_for('main.category', cat='business')}}"><span>Categories</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="{{url_for('main.search_results')}}">Search Result</a></li>
-              <li><a href="#">Travel</a></li>
-              <li><a href="#">Culture</a></li>
-              <li><a href="#">Sport</a></li>
-              <li><a href="#">Food</a></li>
-              <li><a href="#">Startup</a></li>
+              <li><a href="{{url_for('main.category', cat='Travel')}}">Travel</a></li>
+              <li><a href="{{url_for('main.category', cat='Culture')}}">Culture</a></li>
+              <li><a href="{{url_for('main.category', cat='Sport')}}">Sport</a></li>
+              <li><a href="{{url_for('main.category', cat='Food')}}">Food</a></li>
+              <li><a href="{{url_for('main.category', cat='Startup')}}">Startup</a></li>
             </ul>
           </li>
 
@@ -180,45 +180,19 @@
             <h3 class="footer-heading">Recent Posts</h3>
 
             <ul class="footer-links footer-blog-entry list-unstyled">
+            {%for i in range(4)%}
+            
               <li>
                 <a href="{{url_for('main.singlepost', id=1)}}" class="d-flex align-items-center">
-                  <img src="static/img/post-sq-1.jpg" alt="" class="img-fluid me-3">
+                  <img src="{{url_for('static', filename=base_post[i].featured_image)}}" alt="" class="img-fluid me-3">
                   <div>
-                    <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                    <span>5 Great Startup Tips for Female Founders</span>
+                    <div class="post-meta d-block"><span class="date">{{base_post[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(base_post[i].date).fromNow()}}</span></div>
+                    <span>{{base_post[i].post_title}}</span>
                   </div>
                 </a>
               </li>
-
-              <li>
-                <a href="{{url_for('main.singlepost', id=1)}}" class="d-flex align-items-center">
-                  <img src="static/img/post-sq-2.jpg" alt="" class="img-fluid me-3">
-                  <div>
-                    <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                    <span>What is the son of Football Coach John Gruden, Deuce Gruden doing Now?</span>
-                  </div>
-                </a>
-              </li>
-
-              <li>
-                <a href="{{url_for('main.singlepost', id=1)}}" class="d-flex align-items-center">
-                  <img src="static/img/post-sq-3.jpg" alt="" class="img-fluid me-3">
-                  <div>
-                    <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                    <span>Life Insurance And Pregnancy: A Working Mom’s Guide</span>
-                  </div>
-                </a>
-              </li>
-
-              <li>
-                <a href="{{url_for('main.singlepost', id=1)}}" class="d-flex align-items-center">
-                  <img src="static/img/post-sq-4.jpg" alt="" class="img-fluid me-3">
-                  <div>
-                    <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                    <span>How to Avoid Distraction and Stay Focused During Video Calls?</span>
-                  </div>
-                </a>
-              </li>
+              
+            {%endfor%}
 
             </ul>
 

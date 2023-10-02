@@ -13,12 +13,12 @@
             {%for i in range(5)%}
             {%if pagination.items[i]%}
             <div class="d-md-flex post-entry-2 half">
-              <a href="{{url_for('main.singlepost', id=1)}}" class="me-4 thumbnail">
+              <a href="{{url_for('main.singlepost', id=pagination.items[i].id)}}" class="me-4 thumbnail">
                 <img src="{{url_for('static', filename=pagination.items[i].featured_image)}}" alt="" class="img-fluid">
               </a>
               <div>
                 <div class="post-meta"><span class="date">{{pagination.items[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(pagination.items[i].date).fromNow()}}</span></div>
-                <h3><a href="{{url_for('main.singlepost', id=1)}}">{{pagination.items[i].post_title}}?</a></h3>
+                <h3><a href="{{url_for('main.singlepost', id=pagination.items[i].id)}}">{{pagination.items[i].post_title}}?</a></h3>
                 <p>{{pagination.items[i].post_intro}}</p>
                 <div class="d-flex align-items-center author">
                   <div class="photo"><img src="{{url_for('static', filename='/img/person-' + i|string + '.jpg')}}" alt="" class="img-fluid"></div>

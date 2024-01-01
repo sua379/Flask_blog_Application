@@ -138,7 +138,7 @@ def change_password(token):
 def change_email():
     form=Email_update_Form()
     if form.validate_on_submit():
-        token=User_db.change_email_token(form.email.data)
+        token=Users_db.change_email_token(form.email.data)
         send_mail(form.new_email.data, 'Change your Email', 'email/change_email', token=token)
         flash('Check your new email for verification token')
         if request.referrer:
@@ -157,3 +157,4 @@ def change_email_token(token):
     else:
         flash('Your web token has expired, Try again.')
         return redirect(url_for('auth.change_email'))
+

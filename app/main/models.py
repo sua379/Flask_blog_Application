@@ -70,6 +70,11 @@ class blog_db(db.Model):
             post_object.post_intro=post_intr
         db.session.commit()
         
+    @staticmethod
+    def search_blog(search_term):
+        search_result=blog_db.query.filter(blog_db.post_title.like(f"%{search_term}%"))
+        return search_result
+        
     @staticmethod 
     def generate_fake(count=100):
         import forgery_py

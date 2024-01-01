@@ -6,12 +6,12 @@ Created on Wed Aug 23 21:10:14 2023
 """
 
 
-from flask import render_template, redirect, url_for, flash, request, current_app, send_from_directory
+from flask import render_template, redirect, url_for, flash, request, current_app, send_from_directory, request
 from flask_login import current_user, login_required
 from datetime import datetime
 from app.Email_script import send_mail
 from . import main
-from .forms import contactform, CommentForm, Upload_Post
+from .forms import contactform, CommentForm, Upload_Post, SearchForm
 from .models import contact_db, blog_db, comments_db
 from app import db, ckeditor
 import uuid
@@ -86,7 +86,22 @@ def category(cat):
 
 @main.route('/search-results', methods=['GET', 'POST'])
 def search_results():
-    return render_template('search-result.html')
+    search_term=request.form.get('search')
+    popular=blog_db.query.order_by(blog_db.post_intro)
+    trending=blog_db.query.order_by(blog_db.post_title)
+    latest=blog_db.query.order_by(blog_db.date)
+    page=request.args.get('page',1, int)
+    paginate=blog_db.search_blog(search_term).paginate(page=page, per_page=5, error_out=False)
+    posts=paginate.items
+    return render_template('search-result.html',
+                           search_term=request.form.get('search'),
+                           pagination=paginate,
+                           posts=posts,
+                           popular=popular,
+                           trending=trending,
+                           latest=latest,
+                           )
+    
 
 @main.route('/contact', methods=['GET', 'POST'])
 def contact():
@@ -156,17 +171,8 @@ def uplaod():
         #return render_template('test.html', intro=intro)
         return(redirect(url_for('main.home')))
     return render_template('add_post.html', form=form)
-
-@main.context_processor
-def inject_posts():
-    base_post=blog_db.query.order_by(blog_db.date)
-    return dict(base_post=base_post)
         
         
-        
-        
-
-
 @main.route('/check', methods=['GET', 'POST'])
 def check():
     form=Upload_Post()

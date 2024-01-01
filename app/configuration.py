@@ -6,7 +6,8 @@ Created on Tue Aug 22 21:14:32 2023
 """
 
 import os
-
+os.environ['Mail_Password']='jrusdydiyefybphn'
+os.environ['Password']='Martins555.'
 
 
 class config():

@@ -25,6 +25,10 @@ class CommentForm(FlaskForm):
     comment=TextAreaField('Comment', validators=[DataRequired()])
     submit=SubmitField('Post Comment')
     
+class SearchForm(FlaskForm):
+    search=StringField('Search',  validators=[DataRequired()])
+    submit=SubmitField('Submit')
+    
 class ImageForm(FlaskForm):
     featured_image=FileField('Featured Image')
     submit=SubmitField('Uplaod Image')

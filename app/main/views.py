@@ -145,7 +145,7 @@ def image_upload():
 
 @main.route('/upload', methods=['GET', 'POST'])
 @login_required
-def uplaod():
+def upload():
     form=Upload_Post()
     if form.validate_on_submit():
         intr=form.post.data.split('</p>')[0]

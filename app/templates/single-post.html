@@ -14,6 +14,16 @@
               <img src="{{url_for('static', filename=post.featured_image)}}" alt="" class="img-fluid">
               <h1 class="mb-5">{{post.post_title|safe}}</h1>
                     {{post.post_body|safe}}
+            <br>
+            {%if current_user.id==post.author.id or current_user.email=='suatech3@gmail.com'%}
+            <button type="button" class="btn btn-outline-info">
+             <a href="{{url_for('main.edit_post', id=post.id)}}" style="colour:inherit; text-decoration: none;"> Edit Post</a>
+            </button>
+            <button type="button" class="btn btn-outline-danger">
+             <a href="{{url_for('main.delete_post', id=post.id)}}" style="colour:inherit; text-decoration: none;"> Delete Post</a>
+            </button>
+            {%endif%}
+            <br>
                     
             </div><!-- End Single Post Content -->
             
@@ -87,7 +97,7 @@
                 {%for i in range(0,5)%}
                   <div class="post-entry-1 border-bottom">
                     <div class="post-meta"><span class="date">{{popular[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(popular[i].date).fromNow()}}</span></div>
-                    <h2 class="mb-2"><a href="#">{{popular[i].post_title}}</a></h2>
+                    <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=popular[i].id)}}">{{popular[i].post_title}}</a></h2>
                     <span class="author mb-3 d-block">{{popular[i].author.name}}</span>
                   </div>
                   {%endfor%}
@@ -98,7 +108,7 @@
                 {%for i in range(0,5) %}
                   <div class="post-entry-1 border-bottom">
                     <div class="post-meta"><span class="date">{{trending[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(trending[i].date).fromNow()}}</span></div>
-                    <h2 class="mb-2"><a href="#">{{trending[i].post_title}}</a></h2>
+                    <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=trending[i].id)}}">{{trending[i].post_title}}</a></h2>
                     <span class="author mb-3 d-block">{{trending[i].author.name}}</span>
                   </div>
                 {%endfor%}
@@ -109,7 +119,7 @@
                 {%for i in range(0,5)%}
                   <div class="post-entry-1 border-bottom">
                     <div class="post-meta"><span class="date">{{latest[i].category}}</span> <span class="mx-1">&bullet;</span> <span>{{moment(latest[i].date).fromNow()}}</span></div>
-                    <h2 class="mb-2"><a href="#">{{latest[i].post_title}}</a></h2>
+                    <h2 class="mb-2"><a href="{{url_for('main.singlepost', id=latest[i].id)}}">{{latest[i].post_title}}</a></h2>
                     <span class="author mb-3 d-block">{{latest[i].author.name}}</span>
                   </div>
                 {%endfor%}

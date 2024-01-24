@@ -50,3 +50,17 @@ class Upload_Post(FlaskForm):
                                                                                        'Only image files are allowed!')])
     submit=SubmitField('Upload')
     
+class Edit_post_form(FlaskForm):
+    title=StringField('Title', validators=[DataRequired()])
+    post=CKEditorField('Body')
+    category=SelectField('Category', choices=[('Business', 'Business'), 
+                                              ('Culture', 'Culture'), 
+                                              ('Sport','Sport'), 
+                                              ('Food', 'Food'), 
+                                              ('Politics','Politics'),
+                                              ('Celebrity','Celebrity'),
+                                              ('Startup','Startup'),
+                                              ('Travel','Travel')
+                                              ], default='Uncategorized')
+    submit=SubmitField('Update')
+    
